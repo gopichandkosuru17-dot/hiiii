@@ -3,10 +3,12 @@
  * Handles form interactions, API calls, and UI animations
  */
 
-// API Configuration - Auto-detect if we're accessing via network IP
-const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
-    ? 'http://localhost:5000' 
-    : `http://${window.location.hostname}:5000`;
+// API Configuration - Auto-detect if running locally, otherwise use Render backend
+const API_BASE_URL =
+    window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? 'http://localhost:5000'
+        : 'https://fakeaccdetector.onrender.com';
+
 
 // DOM Elements
 const tabButtons = document.querySelectorAll('.tab-btn');
