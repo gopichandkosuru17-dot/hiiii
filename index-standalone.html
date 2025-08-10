@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Account Detector - Demo</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Background -->
+    <div class="background">
+        <div class="gradient-overlay"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <h1>Fake Account Detector</h1>
+            </div>
+            <p class="subtitle">AI-Powered Social Media Account Verification - Demo Version</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Glass Card Container -->
+            <div class="glass-card">
+                <!-- Demo Notice -->
+                <div style="background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); border-radius: 10px; padding: 1rem; margin-bottom: 2rem; text-align: center;">
+                    <i class="fas fa-info-circle" style="color: #ffc107; margin-right: 0.5rem;"></i>
+                    <strong>Demo Version:</strong> This showcases the beautiful interface. For working AI predictions, run the full version locally!
+                </div>
+
+                <!-- Manual Input Form -->
+                <form id="detection-form" class="detection-form">
+                    <div class="form-grid">
+                        <!-- Username Length -->
+                        <div class="form-group">
+                            <label for="username_length">
+                                <i class="fas fa-user"></i>
+                                Username Length
+                            </label>
+                            <input type="number" id="username_length" name="username_length" 
+                                   placeholder="e.g., 12" min="1" max="50" required>
+                            <span class="form-hint">Number of characters in username</span>
+                        </div>
+
+                        <!-- Number of Posts -->
+                        <div class="form-group">
+                            <label for="num_posts">
+                                <i class="fas fa-edit"></i>
+                                Number of Posts
+                            </label>
+                            <input type="number" id="num_posts" name="num_posts" 
+                                   placeholder="e.g., 125" min="0" required>
+                            <span class="form-hint">Total posts published</span>
+                        </div>
+
+                        <!-- Number of Followers -->
+                        <div class="form-group">
+                            <label for="num_followers">
+                                <i class="fas fa-users"></i>
+                                Number of Followers
+                            </label>
+                            <input type="number" id="num_followers" name="num_followers" 
+                                   placeholder="e.g., 847" min="0" required>
+                            <span class="form-hint">Total follower count</span>
+                        </div>
+
+                        <!-- Number Following -->
+                        <div class="form-group">
+                            <label for="num_following">
+                                <i class="fas fa-user-plus"></i>
+                                Number Following
+                            </label>
+                            <input type="number" id="num_following" name="num_following" 
+                                   placeholder="e.g., 342" min="0" required>
+                            <span class="form-hint">Accounts being followed</span>
+                        </div>
+
+                        <!-- Account Age -->
+                        <div class="form-group">
+                            <label for="account_age_days">
+                                <i class="fas fa-calendar-alt"></i>
+                                Account Age (Days)
+                            </label>
+                            <input type="number" id="account_age_days" name="account_age_days" 
+                                   placeholder="e.g., 456" min="1" required>
+                            <span class="form-hint">Days since account creation</span>
+                        </div>
+
+                        <!-- Engagement Ratio -->
+                        <div class="form-group">
+                            <label for="engagement_ratio">
+                                <i class="fas fa-chart-line"></i>
+                                Engagement Ratio
+                            </label>
+                            <input type="number" id="engagement_ratio" name="engagement_ratio" 
+                                   placeholder="e.g., 0.0234" step="0.0001" min="0" required>
+                            <span class="form-hint">Posts per follower ratio</span>
+                        </div>
+                    </div>
+
+                    <!-- Boolean Options -->
+                    <div class="boolean-grid">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="has_profile_picture" name="has_profile_picture">
+                            <label for="has_profile_picture" class="checkbox-label">
+                                <i class="fas fa-image"></i>
+                                Has Profile Picture
+                            </label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="has_bio" name="has_bio">
+                            <label for="has_bio" class="checkbox-label">
+                                <i class="fas fa-info-circle"></i>
+                                Has Bio/Description
+                            </label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="is_verified" name="is_verified">
+                            <label for="is_verified" class="checkbox-label">
+                                <i class="fas fa-check-circle"></i>
+                                Is Verified Account
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-search"></i>
+                        <span>Analyze Account (Demo)</span>
+                        <div class="btn-glow"></div>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Demo Results Section -->
+            <div class="results-section show" id="results-section">
+                <div class="glass-card result-card">
+                    <div class="result-header">
+                        <h2><i class="fas fa-chart-pie"></i> Demo Results</h2>
+                    </div>
+                    <div class="result-content" id="result-content">
+                        <div class="result-status real">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h3>Real Account Detected</h3>
+                                <p>Confidence: 78.5% (Demo Result)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="confidence-bars">
+                            <div class="confidence-bar">
+                                <div class="confidence-label">Real Account</div>
+                                <div class="confidence-value real">78.5%</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill real" style="width: 78.5%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="confidence-bar">
+                                <div class="confidence-label">Fake Account</div>
+                                <div class="confidence-value fake">21.5%</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill fake" style="width: 21.5%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(255, 255, 255, 0.05); padding: 1rem; border-radius: 10px; margin-top: 1rem; text-align: center;">
+                            <i class="fas fa-lightbulb" style="color: #ffc107; margin-right: 0.5rem;"></i>
+                            <strong>This is a demo result!</strong><br>
+                            For real AI predictions, download and run the full version locally.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Fake Account Detector. Powered by AI & Machine Learning.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.7;">
+                Demo Version - Download the full version for working AI predictions
+            </p>
+        </footer>
+    </div>
+
+    <!-- Quick Demo Button -->
+    <button class="demo-btn" id="demo-btn" title="Load Demo Data">
+        <i class="fas fa-play"></i>
+    </button>
+
+    <!-- Floating Particles -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <script>
+        // Demo version - simplified JavaScript
+        document.getElementById('demo-btn').addEventListener('click', function() {
+            // Fill form with demo data
+            document.getElementById('username_length').value = 12;
+            document.getElementById('num_posts').value = 125;
+            document.getElementById('num_followers').value = 847;
+            document.getElementById('num_following').value = 342;
+            document.getElementById('account_age_days').value = 456;
+            document.getElementById('engagement_ratio').value = 0.1476;
+            document.getElementById('has_profile_picture').checked = true;
+            document.getElementById('has_bio').checked = true;
+            document.getElementById('is_verified').checked = false;
+            
+            // Show notification
+            showNotification('Demo data loaded! This showcases the interface design.', 'success');
+        });
+
+        document.getElementById('detection-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showNotification('This is a demo version. Download the full version for real AI predictions!', 'info');
+        });
+
+        // Simple notification function
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 2rem;
+                right: 2rem;
+                background: ${type === 'success' ? '#4ecdc4' : '#48cae4'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+                z-index: 1000;
+                font-family: 'Poppins', sans-serif;
+                font-weight: 500;
+                max-width: 300px;
+                animation: slideInFromRight 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutToRight 0.3s ease-out';
+                setTimeout(() => notification.remove(), 300);
+            }, 4000);
+        }
+
+        // Add notification animations
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes slideInFromRight {
+                0% { transform: translateX(100%); opacity: 0; }
+                100% { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOutToRight {
+                0% { transform: translateX(0); opacity: 1; }
+                100% { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+
